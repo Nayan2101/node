@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  </head>
+  <body>
+    <div id="div1"></div>
+    <button type="button" id="dis">Display</button>
+    <button type="button" id="del">Delete</button>
+    <script>
+      $(document).ready(function () {
+        $("#dis").click(function () {
+          $.ajax({
+            method: "GET",
+            url: "http://localhost:8000/api/user",
+            success: function (html) {
+                console.log(html.payload);
+            },
+          });
+        });
+        $("#del").click(function () {
+          $.ajax({
+            method: "DELETE",
+            url: "http://localhost:8000/api/user/651ce6a037d17d0ffc745bb4",
+            success: function (html) {
+                console.log(html.payload);
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

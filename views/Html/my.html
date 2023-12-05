@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  </head>
+  <body>
+    <!-- display data -->
+    <button type="button" id="dis">Display</button>
+    <!-- end display data -->
+    <!-- add form -->
+    <form>
+        <input type="text" id="uname"><br>
+        <input type="password" name="pass" id="pass"><br>
+        <input type="button" id="sub" value="sub">
+    </form>
+    <!-- end add form -->
+    <!-- delete data -->
+    <button type="button" id="del">Delete</button>
+    <!-- end delete data -->
+    <!-- upadte form -->
+    <form>
+        <input type="hidden" name="id" id="id">
+        <input type="text" id="uname"><br>
+        <input type="password" name="pass" id="pass"><br>
+        <input type="button" id="sub" value="sub">
+    </form>
+    <!-- end update form -->
+    <script>
+        $(document).ready(function () {
+            // Display Data
+          $("#dis").click(function () {
+            $.ajax({
+              method: "GET",
+              url: "http://localhost:8000/api/user",
+              success: function (html) {
+                  console.log(html.payload);
+              },
+            });
+          });
+        //   insert data
+        $(document).ready(function () {
+          $("#sub").click(function () {
+           var uname = $("#uname").val();
+           var pass = $("#pass").val();
+            $.ajax({
+              method: "POST",
+              url: "http://localhost:8000/api/user",
+              data:{
+                username:uname,
+                password:pass
+              },
+              success: function (html) {
+                $("#div1").html(html);
+              },
+            });
+          });
+        });
+        //   fetch data for edit
+        $(document).ready(function () {
+            $.ajax({
+            method: "GET",
+            url: "http://localhost:8000/api/user/651ce6a037d17d0ffc745bb4",
+            success: function (html) {
+                console.log(html.payload.user._id);
+                $("#id").val(html.payload.user._i)
+                $("#uname").val(html.payload.user.username)
+                $("#pass").val(html.payload.user.password)
+            },
+          });
+        //   upadate user
+          $("#sub").click(function () {
+           var uname = $("#uname").val();
+           var pass = $("#pass").val();
+            $.ajax({
+              method: "PUT",
+              url: "http://localhost:8000/api/user/651ce6a037d17d0ffc745bb4",
+              data:{
+                username:uname,
+                password:pass
+              },
+              success: function (html) {
+                console.log(html)
+                // $("#div1").html(html);
+              },
+            });
+          });
+        });
+        //   Delete Data
+          $("#del").click(function () {
+            $.ajax({
+              method: "DELETE",
+              url: "http://localhost:8000/api/user/651ce6a037d17d0ffc745bb4",
+              success: function (html) {
+                  console.log(html.payload);
+              },
+            });
+          });
+        });
+      </script>
+    </body>
+  </html>
+  

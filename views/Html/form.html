@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+    <div id="div1"></div>
+    <form>
+        <input type="text" id="uname"><br>
+        <input type="password" name="pass" id="pass"><br>
+        <input type="button" id="sub" value="sub">
+    </form>
+    <script>
+        $(document).ready(function () {
+          $("#sub").click(function () {
+           var uname = $("#uname").val();
+           var pass = $("#pass").val();
+            $.ajax({
+              method: "POST",
+              url: "http://localhost:8000/api/user",
+              data:{
+                username:uname,
+                password:pass
+              },
+              success: function (html) {
+                $("#div1").html(html);
+              },
+            });
+          });
+        });
+      </script>
+</body>
+</html>
