@@ -4,6 +4,8 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const { Port, Host, LocalUrl } = require("./config");
+const path = require('path')
+const ejs = require("ejs");
 
 mongoose
   .connect(LocalUrl, {
@@ -23,6 +25,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use("/", express.static("./"));
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
 const userRoutes = require("./src/routes/userRoutes");
 const roleRoutes = require("./src/routes/roleRoutes");

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/student/insert">Add</a>
+    <ul>
+        <% user.forEach(a => { %>
+            <li>
+                <strong>Name:</strong> <%= a.name %><br>
+                <strong>Email:</strong> <%= a.email %><br>
+                <strong>Password:</strong> <%= a.password %><br>
+
+                <!-- Update button linking to the update route -->
+                <a href="/student/updatebyid/<%= a.id %>">Update</a>
+
+                <!-- Delete button linking to the delete route -->
+                <a href="/student/delete/<%= a.id %>">Delete</a>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>
