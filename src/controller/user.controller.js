@@ -1,3 +1,4 @@
+const user = require('../model/user');
 
 exports.userRegister = async(req,res)=>{
     try {
